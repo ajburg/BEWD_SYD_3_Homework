@@ -70,18 +70,25 @@ explainRules()
 
 #Allow 3 attempts to guess the secret number
 attempts = 0
+hint = " "
 while attempts < 3 do
 	attempts += 1 #keep track of their guesses
-	puts "Please enter guess #" + String(attempts) + ":"
+	puts "Please enter guess #" + String(attempts) + ":" + hint
 	guess = $stdin.gets.delete("\n")
 	checkArgs(guess) #validate that the guess is a number between 0 and 10
 	begin
 		if Integer(guess) == secretNum
 			puts "You got it!"
 			exit
+		elsif Integer(guess) > secretNum
+			hint = " (hint: lower)"
+		elsif Integer(guess) < secretNum
+			hint = " (hint: higher)"
+		else
+			hint = ""
 		end
 	rescue
-	
+		
 	end
 end
 
