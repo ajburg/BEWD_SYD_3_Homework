@@ -42,7 +42,8 @@ def reportError()
 end
 
 def explainRules()
-	puts "\nhere are the rules: XYZ\n"
+	puts "\nTry to guess the secret number, which you already provided in the arguments"
+	puts ""
 end
 
 def checkArgs(value)
