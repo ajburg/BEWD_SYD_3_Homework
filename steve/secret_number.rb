@@ -39,21 +39,16 @@
 
 def reportError()
 	puts "invalid arguments: expecting a number between 0 and 10"
-	exit
 end
 
 def explainRules()
 	puts "\nhere are the rules: XYZ\n"
 end
 
-def checkArgs(args)
+def checkArgs(value)
 	#Check that there is one integer argument, between 0 and 10
-	if args.length != 1
-		reportError()	
-	end
-	x = ARGV[0]
 	begin
-		x = Integer(x)
+		x = Integer(value)
 		if x < 0 or x > 10
 			reportError
 		end
@@ -63,24 +58,32 @@ def checkArgs(args)
 	return x
 end
 
-attempts = 0
-x = checkArgs(ARGV)
-puts x
+#Check that only one integer between 0-10 has been specified as the secret number
+if ARGV.length != 1
+	reportError()
+	exit
+end
+secretNum = checkArgs(ARGV[0])
+
+#Post the rules
 explainRules()
 
-
+#Allow 3 attempts to guess the secret number
+attempts = 0
 while attempts < 3 do
 	attempts += 1 #keep track of their guesses
 	puts "Please enter guess #" + String(attempts) + ":"
-	guess = $stdin.gets
-	puts "you entered " + String(guess) + " : secret is actually " + String(x)
-	#checkArgs(guess) #validate the guess is a number between 0 and 10
-	#TODO - make checkargs work here, and not just with an array input
-	if guess == x
-		puts "You got it!"
-		exit
+	guess = $stdin.gets.delete("\n")
+	checkArgs(guess) #validate that the guess is a number between 0 and 10
+	begin
+		if Integer(guess) == secretNum
+			puts "You got it!"
+			exit
+		end
+	rescue
+	
 	end
 end
 
-puts "Sorry, you lose"
+puts "Sorry, you lose. Secret number was actually " + String(secretNum)
 
