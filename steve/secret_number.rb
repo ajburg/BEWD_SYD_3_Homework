@@ -42,18 +42,45 @@ def reportError()
 	exit
 end
 
-#Check that there is one integer argument, between 0 and 10
-if ARGV.length != 1
-	reportError()	
-end
-x = ARGV[0]
-begin
-	x = Integer(x)
-	if x < 0 or x > 10
-		reportError
-	end
-rescue
-	reportError()
+def explainRules()
+	puts "\nhere are the rules: XYZ\n"
 end
 
+def checkArgs(args)
+	#Check that there is one integer argument, between 0 and 10
+	if args.length != 1
+		reportError()	
+	end
+	x = ARGV[0]
+	begin
+		x = Integer(x)
+		if x < 0 or x > 10
+			reportError
+		end
+	rescue
+		reportError()
+	end
+	return x
+end
+
+attempts = 0
+x = checkArgs(ARGV)
 puts x
+explainRules()
+
+
+while attempts < 3 do
+	attempts += 1 #keep track of their guesses
+	puts "Please enter guess #" + String(attempts) + ":"
+	guess = $stdin.gets
+	puts "you entered " + String(guess) + " : secret is actually " + String(x)
+	#checkArgs(guess) #validate the guess is a number between 0 and 10
+	#TODO - make checkargs work here, and not just with an array input
+	if guess == x
+		puts "You got it!"
+		exit
+	end
+end
+
+puts "Sorry, you lose"
+
