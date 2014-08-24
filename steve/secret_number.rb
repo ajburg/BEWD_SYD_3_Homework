@@ -59,6 +59,7 @@ def checkArgs(value)
 	return x
 end
 
+#*******************************************************************************
 #Check that only one integer between 0-10 has been specified as the secret number
 if ARGV.length != 1
 	reportError()
@@ -70,10 +71,9 @@ secretNum = checkArgs(ARGV[0])
 explainRules()
 
 #Allow 3 attempts to guess the secret number
-attempts = 0
+attempts = 1
 hint = " "
-while attempts < 3 do
-	attempts += 1 #keep track of their guesses
+while attempts < 4 do
 	puts "Please enter guess #" + String(attempts) + ":" + hint
 	guess = $stdin.gets.delete("\n")
 	checkArgs(guess) #validate that the guess is a number between 0 and 10
@@ -83,10 +83,13 @@ while attempts < 3 do
 			exit
 		elsif Integer(guess) > secretNum
 			hint = " (hint: lower)"
+			attempts += 1 #increment the counter
 		elsif Integer(guess) < secretNum
 			hint = " (hint: higher)"
+			attempts += 1 #increment the counter
 		else
 			hint = ""
+			attempts += 1 #increment the counter
 		end
 	rescue
 		
