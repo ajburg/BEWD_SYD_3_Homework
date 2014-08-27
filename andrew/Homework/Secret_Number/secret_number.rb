@@ -55,7 +55,7 @@ puts "Welcome #{name}, You have to guess the number between 1 and 10. You have 3
 until finishloop == true do
 	puts "Please enter your guess: (you have #{loopcount} guesses left)"
 	guess=input
-	puts "Your guess is outside of 1 to 10, its a waste of a guess!" if guess.to_i < 0 or guess.to_i > 10
+	puts "Your guess is outside of 1 to 10, its a waste of a guess!" if guess.to_i < 0 || guess.to_i > 10
 	if guess.to_i > number
 		puts "The number is lower" if loopcount > 1
 		guesscount += 1
