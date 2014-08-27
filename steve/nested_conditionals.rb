@@ -10,23 +10,23 @@
 #
 ################################################################################
 def checkIsNumber(number)
-	begin
-		x = Integer(number)
-		return true
-	rescue
-		puts "enter a number dude"
-		return false
-	end
+  begin
+    x = number.to_i
+    return true
+  rescue
+    puts "enter a number dude"
+    return false
+  end
 end
 
 def checkIsDay(day)
-	days = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
-	if(days.include? day.downcase)
-		return true
-	else
-		puts "Enter a valid day, dude"
-		return false
-	end
+  days = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+  if(days.include? day.downcase)
+    return true
+  else
+    puts "Enter a valid day, dude"
+    return false
+  end
 end
 
 programs_day_of_week = "tuesday"
@@ -40,21 +40,21 @@ programs_number = 3
 
 cont = true
 while cont
-	puts "guess the day of the week"
-	dayGuess = gets.chomp
-	if(checkIsDay(dayGuess))
-		cont = false
-	end	
+  puts "guess the day of the week"
+  dayGuess = gets.chomp
+  if(checkIsDay(dayGuess))
+    cont = false
+  end  
 end
 
 cont = true
 while cont
-	puts "guess the number"
-	numberGuess = gets.chomp
-	if checkIsNumber(numberGuess)
-		numberGuess = Integer(numberGuess)
-		cont = false
-	end
+  puts "guess the number"
+  numberGuess = gets.chomp
+  if checkIsNumber(numberGuess)
+    numberGuess = numberGuess.to_i
+    cont = false
+  end
 end
 
 
@@ -65,20 +65,20 @@ end
 dayCorrect = false
 numberCorrect = false
 if dayGuess.downcase == programs_day_of_week
-	dayCorrect = true
+  dayCorrect = true
 end
 if numberGuess == programs_number
-	numberCorrect = true
+  numberCorrect = true
 end
 
 if(dayCorrect and numberCorrect)
-	puts "Right on both counts"
+  puts "Right on both counts"
 elsif dayCorrect
-	puts "You got the day right"
+  puts "You got the day right"
 elsif numberCorrect
-	puts "You got the number right"
+  puts "You got the number right"
 else
-	puts "You got them both wrong"
+  puts "You got them both wrong"
 end
 # 3. Now let's try seeing if two things are true at the same time.
 #
@@ -99,7 +99,7 @@ end
 # 4. One last time, ask again for a day of the week and a number, except
 #    this time only one of them needs to be correct to "win"! But if
 #    they don't guess either correctly, they "lose"!
-if(dayCorrect or numberCorrect)
-	puts "(you get one point for getting it part right)"
+if(dayCorrect || numberCorrect)
+  puts "(you get one point for getting it part right)"
 end
 

@@ -7,10 +7,10 @@
 
 
 def reportStudents(students)
-	puts "\nThere are " + students.length.to_s + " students"
-	puts "the first student is " + students.first.to_s
-	puts "The second student is " + students[1].to_s
-	puts "the last student is " + students.last.to_s
+  puts "\nThere are " + students.length.to_s + " students"
+  puts "the first student is " + students.first.to_s
+  puts "The second student is " + students[1].to_s
+  puts "the last student is " + students.last.to_s
 end
 # Create a new array and assign it to a variable
 a = []

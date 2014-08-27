@@ -1,96 +1,52 @@
 #!/usr/bin/env ruby
-###############################################################################
-#
-# Back-End Web Development - Homework #1
-#
-# Secret Number is a game you will build in two parts.
-# The purpose of the game is to have players guess a secret number from 1-10.
-#
-# Read the instructions below.
-# This exercise will test your knowledge of Variables and Conditionals.
-#
-###############################################################################
-#
-# We're ready to program! To practice our Ruby skills lets create a secret number game.
-# In this game players have three tries to guess a secret number between 1 and 10.
-#
-# Here are some guidelines to building your game:
-#
-# Intros
-#   - Welcome the player to your game. Let them know who created the game.
-#   - Ask for the player's name then personally greet them by printing to the screen, "Hi player_name!"
-#   - Any good game will communicate the rules. Let the player know they must guess a number between 1 and 10
-#   and that they only have 3 tries to do so.
-#
-# Functionality:
-#  -  Hard code the secret number. Make it a random number between 1 and 10.
-#  -  Ask the user for their guess.
-#  -  Verify if they were correct. If the player guesses correctly they win the game they should be congratulated and the game should end.
-#  -  If they guess incorrectly, give the player some direction. If they guess too high let them know, if they guess too low, let them know.
-#  -  Don't forget to let your players know how many guesses they have left. Your game should say something like
-#     "You have X many guesses before the game is over enter a another number"
-#  -  If they don't guess correctly after 3 tries, print that the Player lost and the game is over. Also let them know what the `secret_number` was.
-#
-# Make sure to add helpful comments to your code to document what each section does.
-#
-# Remember to cast input from the Player into the appropriate data type.
-#
-###############################################################################
+# have players guess a secret number from 1-10.
 
-def reportError()
-	puts "invalid arguments: expecting a number between 0 and 10"
+def report_error
+  puts 'invalid arguments: expecting a number between 0 and 10'
 end
 
-def checkArgs(value)
-	#Check that there is one integer argument, between 0 and 10
-	begin
-		x = Integer(value)
-		if x < 0 or x > 10
-			reportError
-		end
-	rescue
-		reportError()
-	end
-	return x
+def check_args(value)
+  # Check that there is one integer argument, between 0 and 10
+  begin
+    x = Integer(value)
+    report_error if x < 0 || x > 10
+  rescue
+    report_error
+  end
+  return x
 end
 
-#*******************************************************************************
-#Check that only one integer between 0-10 has been specified as the secret number
+# **********************************************************************
+# Check that only one integer between 0-10 has been specified as the secret
 if ARGV.length != 1
-	reportError()
-	exit
+  report_error
+  exit
 end
-secretNum = checkArgs(ARGV[0])
+secret_num = check_args(ARGV[0])
 
-#Post the rules
-puts "\nTry to guess the secret number (which you already provided in the arguments...)"
-puts "\n"
+# Post the rules
+puts 'Try to guess the secret number (it was in the arguments...)'
+puts
 
-#Allow 3 attempts to guess the secret number
+# Allow 3 attempts to guess the secret number
 attempts = 1
-hint = " "
-while attempts < 4 do
-	puts "Please enter guess #" + String(attempts) + ":" + hint
-	guess = $stdin.gets.delete("\n")
-	checkArgs(guess) #validate that the guess is a number between 0 and 10
-	begin
-		if Integer(guess) == secretNum
-			puts "You got it!"
-			exit
-		elsif Integer(guess) > secretNum
-			hint = " (hint: lower)"
-			attempts += 1 #increment the counter
-		elsif Integer(guess) < secretNum
-			hint = " (hint: higher)"
-			attempts += 1 #increment the counter
-		else
-			hint = ""
-			attempts += 1 #increment the counter
-		end
-	rescue
-		
-	end
+hint = ''
+while attempts < 4
+  puts 'Please enter guess #' + attempts.to_s + ':' + hint
+  guess = check_args($stdin.gets.chomp)
+  if guess.class == Fixnum
+    attempts += 1
+    if guess == secret_num
+      puts 'You got it!'
+      exit
+    elsif guess > secret_num
+      hint = ' (hint: lower)'
+    elsif guess < secret_num
+      hint = ' (hint: higher)'
+    end
+  else
+    hint = ''
+  end
 end
 
-puts "Sorry, you lose. Secret number was actually " + String(secretNum)
-
+puts 'Sorry, you lose. Secret number was actually '  + secret_num.to_s
