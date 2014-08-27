@@ -41,11 +41,6 @@ def reportError()
 	puts "invalid arguments: expecting a number between 0 and 10"
 end
 
-def explainRules()
-	puts "\nTry to guess the secret number, which you already provided in the arguments"
-	puts ""
-end
-
 def checkArgs(value)
 	#Check that there is one integer argument, between 0 and 10
 	begin
@@ -68,7 +63,8 @@ end
 secretNum = checkArgs(ARGV[0])
 
 #Post the rules
-explainRules()
+puts "\nTry to guess the secret number (which you already provided in the arguments...)"
+puts "\n"
 
 #Allow 3 attempts to guess the secret number
 attempts = 1
