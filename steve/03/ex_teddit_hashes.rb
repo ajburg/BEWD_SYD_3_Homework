@@ -40,20 +40,20 @@ end
 stories = [{ title: "Monkeys thank mayor for flounder tooth necklace", category: "Teeth", votes: 1 }]
 
 puts "Welcome to Teddit! a text based news aggregator. Get today's news tomorrow!"
-puts "Please enter a News story:"
-title = gets.chomp
-puts "Please give it a category:"
-category = gets.chomp
-upvotes = calculate_upvotes(title, category)
-story = {title: title, category: category, votes: upvotes}
-stories.push(story)
 
-#puts "New story added! #{title}, Category: #{category.capitalize}, Current Upvotes: #{upvotes}"
+#Keep looping until the user enters a blank line
+while true
+	puts "\nPlease enter a new story (blank to cancel):"
+	title = gets.chomp
+	break if title == ""
+	puts "Please give it a category:"
+	category = gets.chomp
+	upvotes = calculate_upvotes(title, category)
+	story = {title: title, category: category, votes: upvotes}
+	stories.push(story)
+end
 
-puts
 puts "Current stories are:"
-puts
-
 stories.each do |story, category, votes|
 	puts "Story: #{story[:title]} in Category: #{story[:category]} (#{story[:votes]} votes)"
 end
