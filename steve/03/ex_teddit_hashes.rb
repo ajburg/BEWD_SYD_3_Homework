@@ -24,7 +24,7 @@ stories = [{ title: 'Monkeys thank mayor for flounder tooth necklace',
 puts 'Welcome to Teddit! Get today\'s news tomorrow!'
 
 # Keep looping until the user enters a blank line
-while true
+loop do
   puts 'Please enter a new story (blank to cancel):'
   title = gets.chomp
   break if title == ''
