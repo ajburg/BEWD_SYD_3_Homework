@@ -8,7 +8,16 @@ end
 # For numbers which are multiples of both three and five print “FizzBuzz”.
 #
 # Your code here
-
+def fizzbuzz(x)
+#  if num % 3 == 0 && num % 5 == 0
+#    num = "FizzBuzz"
+#  elsif num % 3 == 0
+#    num = "Fizz"
+#  elsif num % 5 == 0
+#    num = "Buzz"
+#  end
+  x % 5 == 0 && x % 3 == 0 ? "FizzBuzz" : x % 5 == 0 ? "Buzz" : x % 3 == 0? "Fizz" : x
+end
 
 # Tests
 assert_equal fizzbuzz(1), 1
@@ -19,6 +28,6 @@ assert_equal fizzbuzz(15), "FizzBuzz"
 assert_equal fizzbuzz(5175), "FizzBuzz"
 
 # uncomment this code when your tests pass
-#1.upto(100) do |number|
-#  puts fizzbuzz(number)
-#end
+1.upto(100) do |number|
+  puts fizzbuzz(number)
+end

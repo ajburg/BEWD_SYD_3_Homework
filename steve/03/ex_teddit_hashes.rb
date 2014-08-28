@@ -1,13 +1,6 @@
 # Step 1: Working with Arrays and Hashes
 
 def calculate_upvotes(title)
-  # Write code so that:
-  # If the Story is about cats multiply the upvotes by 5
-  # If the Story is about bacon multiply the upvotes by 8
-  # If the Story is about Food it gets 3 times the upvotes.
-
-  # For example:
-  # "Cats frolic despite tuna shortage" should give you 5 times the upvotes!
   upvotes = 1
   if title.include? 'cats'
     upvotes = 5
