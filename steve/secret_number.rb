@@ -9,7 +9,9 @@ def check_args(value)
   # Check that there is one integer argument, between 0 and 10
   begin
     x = Integer(value)
-    report_error if x < 0 || x > 10
+    if x < 0 || x > 10
+      report_error
+    end
   rescue
     report_error
   end
@@ -50,3 +52,4 @@ while attempts < 4
 end
 
 puts 'Sorry, you lose. Secret number was actually '  + secret_num.to_s
+
