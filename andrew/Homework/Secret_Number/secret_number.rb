@@ -46,7 +46,6 @@ number = rand(1..10)
 loopcount = 3
 guesscount = 0
 
-
 puts 'Welcome to Number guesser!'
 puts 'What is your name?'
 name = input
@@ -74,7 +73,7 @@ until finishloop == true do
 				guesscount = 0
 		else
 			finishloop = true
-		end 
+		end
 	end
 	loopcount -= 1
 	if finishloop != true && loopcount==0
@@ -88,7 +87,7 @@ until finishloop == true do
 			guesscount = 0
 		else
 			finishloop = true
-		end 
+		end
 	end
 end
 puts 'Thanks for playing!'
