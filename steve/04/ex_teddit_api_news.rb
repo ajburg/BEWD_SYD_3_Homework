@@ -7,9 +7,9 @@ def calculate_upvotes(story)
   if story[:title].downcase.include?('iphone')
     story[:upvotes] *= 5
   elsif story[:title].downcase.include?('taco')
-    story[:upvotes] *=8
+    story[:upvotes] *= 8
   end
-  if story[:category].downcase == "tech"
+  if story[:category].downcase == 'tech'
     story[:upvotes] *= 3
   end
 end
@@ -19,12 +19,12 @@ def show_all_stories(stories)
     puts
     puts story[:title].upcase + ' by ' + story[:source] + ' (' + story[:category] + ')'
     puts story[:content][0..77] + '...'
-    puts 'Votes: ' + story[:upvotes].to_s   
+    puts 'Votes: ' + story[:upvotes].to_s
   end
 end
 
 def construct_story_hash(title, category, source, content, link)
-  { :title => title, :category => category, :upvotes => 0, :source => source, :content => content, :link => link}
+  {title: title, category: category, upvotes: 0, source: source, content: content, link: link }
 end
 
 def process_mashable_stories(stories)
