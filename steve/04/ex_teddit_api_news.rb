@@ -1,37 +1,30 @@
 #!/usr/bin/env ruby
-
-# Pull the json, parse it and then make a new story hash out of each story(Title, Category, Upvotes)
-# Add each story to an array and display your "Front page"
-# We're going to add a remote data source to pull in stories from Mashable and Digg.
-  # http://mashable.com/stories.json
-  # http://digg.com/api/news/popular.json
-# These stories will also be upvoted based on our rules. No more user input!
-
-# Pull the json, parse it and then make a new story hash out of each story(Title, Category, Upvotes)
-# Add each story to an array and display your "Front page"
 require 'json'
 require 'rest-client'
 
 def calculate_upvotes(story)
   story[:upvotes] = 1
-  if story[:title].downcase.include?('cat')
+  if story[:title].downcase.include?('iphone')
     story[:upvotes] *= 5
-  elsif story[:title].downcase.include?('bacon')
+  elsif story[:title].downcase.include?('taco')
     story[:upvotes] *=8
   end
-  if story[:category].downcase == "food"
+  if story[:category].downcase == "tech"
     story[:upvotes] *= 3
   end
 end
 
 def show_all_stories(stories)
   stories.each do |story|
-    puts "Story: #{story[:title][0..30].gsub(/\s\w+\s*$/, '...')}, Category: (#{story[:category]}), Current Upvotes: #{story[:upvotes]}, Source: #{story[:source]}"
+    puts
+    puts story[:title].upcase + ' by ' + story[:source] + ' (' + story[:category] + ')'
+    puts story[:content][0..77] + '...'
+    puts 'Votes: ' + story[:upvotes].to_s   
   end
 end
 
-def construct_story_hash(title, category, source, content)
-  { :title => title, :category => category, :upvotes => 0, :source => source, :content => content}
+def construct_story_hash(title, category, source, content, link)
+  { :title => title, :category => category, :upvotes => 0, :source => source, :content => content, :link => link}
 end
 
 def process_mashable_stories(stories)
@@ -48,19 +41,15 @@ def process_mashable_stories(stories)
         link = article['link']
         shares = article['shares']['total']
         category = article['channel']
-        story = construct_story_hash(title, category, author, content)
+        story = construct_story_hash(title, category, author, content, link)
+        calculate_upvotes(story)
         stories.push(story)
       end
     end
   end
 end
 
-def show_all_stories(stories)
-  puts stories
-end
-
 stories = []
-
 puts 'Getting stories from Mashable'
 process_mashable_stories(stories)
 show_all_stories(stories)
