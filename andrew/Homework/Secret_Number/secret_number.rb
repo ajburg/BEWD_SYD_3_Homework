@@ -40,55 +40,66 @@ def input
 	gets.chomp
 end
 
+def isinteger?(guess)
+    guess.to_i.to_s == guess
+end
 
-finishloop = false
-number = rand(1..10)
-loopcount = 3
-guesscount = 0
+def valuecheck(guess)
+	if isinteger?(guess) == true
+		puts "Your guess is outside of 1 to 10, its a waste of a guess!" if guess.to_i < 0 || guess.to_i > 10
+		if guess.to_i > @number
+			return 'The number is lower'
+		elsif guess.to_i < @number
+			return 'The number is higher'
+		elsif guess.to_i == @number
+			return "Guessed"
+		end
+	else
+		return "Char"
+	end
+end
+
+def playagain
+	puts "Would you like to play again? (yes/no)"
+		playagain = input
+		if playagain.to_s.upcase == 'YES'
+				@number = rand(1..10)
+				@loopcount = 3
+				@guesscount = 0
+		end
+end
+
+@number = rand(1..10)
+@loopcount = 3
+@guesscount = 0
 
 puts 'Welcome to Number guesser!'
 puts 'What is your name?'
 name = input
 
 puts "Welcome #{name}, You have to guess the number between 1 and 10. You have 3 tries to do so."
-#until finishloop == true do
-while finishloop != true do
-	puts "Please enter your guess: (you have #{loopcount} guesses left)"
+
+while @loopcount > 0 do
+	puts "Please enter your guess: (you have #{@loopcount} guesses left)"
 	guess=input
-	puts "Your guess is outside of 1 to 10, its a waste of a guess!" if guess.to_i < 0 || guess.to_i > 10
-	if guess.to_i > number
-		puts "The number is lower" if loopcount > 1
-		guesscount += 1
-	elsif guess.to_i < number
-		puts "The number is higher" if loopcount > 1
-		guesscount += 1
-	elsif guess.to_i == number
-		guesscount += 1
-		puts "You Guessed it! You guessed it in #{guesscount} guesses!"
-		puts "Would you like to play again? (yes/no)"
-		playagain = input
-		if playagain.to_s.upcase == 'YES'
-				finishloop = false
-				number = rand(1..10)
-				loopcount = 3
-				guesscount = 0
+
+	@guesscount += 1
+
+	result=valuecheck(guess)
+	if result != 'Char'
+		if result != 'Guessed'
+			@loopcount -= 1
+			puts result if @loopcount >= 1 # The if statement is here to not output the guess direction on the last guess, becuase the result is displayed
 		else
-			finishloop = true
+			puts "You Guessed it! You guessed it in #{@guesscount} guesses!"
+			@loopcount = 0
 		end
+	else
+		puts 'You need to enter a Number not a letter'
+		@guesscount -= 1
 	end
-	loopcount -= 1
-	if finishloop != true && loopcount==0
-		puts "You ran out of guesses! the number was #{number}..."
-		puts "Would you like to play again? (yes/no)"
-		playagain = input
-		if playagain.to_s.upcase == 'YES'
-			finishloop = false
-			number = rand(1..10)
-			loopcount = 3
-			guesscount = 0
-		else
-			finishloop = true
-		end
-	end
+
+	puts "You ran out of guesses! the number was #{@number}..." if @loopcount == 0 && result != "Guessed"
+	playagain if @loopcount == 0 || result == "Guessed"
 end
 puts 'Thanks for playing!'
