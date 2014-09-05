@@ -1,6 +1,6 @@
 class Actor
   attr_accessor :name
-  attr_accesstor :filmography
+  attr_accessor :filmography
   
   def initialize(name)
     @name = name
