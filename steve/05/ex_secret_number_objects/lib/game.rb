@@ -2,16 +2,19 @@ require 'lib/person'
 require 'lib/secret_number'
 
 class Game
-# this class will be complex
-# we need to write logic to initialize a new game, and run the game loop
-# we'll want to write a few separate methods for unique tasks so that our
-# code is structured properly
+  attr_reader :guess_idx
+  attr_reader :guesses
+  attr_reader :secret_num
   def initialize
-    puts 'initialized the game'
+    @secret_num = SecretNumber.generate_random_number
+    @guess_idx = 0
+    @guesses = 3
   end
   
   def start
     puts 'started the game'
+#    byebug
+    
   end
   
 end

@@ -42,6 +42,7 @@
 
 $:.unshift (File.dirname(__FILE__))
 require 'lib/game'
+require 'byebug'
 
 # put code here print a welcome message for your user
 puts 'Blah blah blah. What is your name?'
