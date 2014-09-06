@@ -7,8 +7,6 @@ class Film
     @title = title
     @short_title = title.gsub(" ","")
     @cast = [actor_name]
-    
-    puts "Created a new film #{@title} with actor #{actor_name}"
   end
 
 end
