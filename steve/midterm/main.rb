@@ -8,21 +8,28 @@ require 'film'
 require 'byebug'
 
 imdb = Imdb.new
-films = []
+films = {}
 actors = []
 
 #Create some actor objects
 actors << Actor.new('Kevin Bacon')
-actors << Actor.new('Brad Pitt')
-actors << Actor.new('Julia Roberts')
+#actors << Actor.new('Brad Pitt')
+#actors << Actor.new('Julia Roberts')
 
 #Fetch their filmographies from IMDB. (If I knew how to program events
 #I'd do this automatically when each actor was created)
 actors.each do |actor|
   imdb.find_films(actor)
-  actor.films.each do |film|
-    films << film
+  
+  #Create a new Film object
+  actor.films.each do |film_title|
+    film = Film.new(film_title, actor.name)
+    key = film.short_title
+#    eval "films[:key] = film"
+    films[key] = film
   end
+  
 end
 
+byebug
 puts films
