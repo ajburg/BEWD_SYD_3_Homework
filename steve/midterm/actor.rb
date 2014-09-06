@@ -1,11 +1,10 @@
 class Actor
   attr_accessor :name
-  attr_accessor :filmography
+  attr_accessor :films
   
   def initialize(name)
     @name = name
-    @filmography = []
-    puts "created a new actor: #{@name}"
+    @films = []
   end
   
 end

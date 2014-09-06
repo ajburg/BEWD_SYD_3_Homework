@@ -8,6 +8,16 @@ require 'film'
 require 'byebug'
 
 imdb = Imdb.new
+films = []
+actors = []
 
-kevin_bacon = Actor.new('Kevin Bacon')
-imdb.find_actor(kevin_bacon)
+actors << Actor.new('Kevin Bacon')
+actors << Actor.new('Brad Pitt')
+actors << Actor.new('Julia Roberts')
+actors.each do |actor|
+  imdb.find_films(actor)
+  puts
+  puts actor.name.upcase + ':'
+  puts actor.films
+end
+
