@@ -1,33 +1,31 @@
-#Six degrees of Kevin Bacon
-#
-#Given an actor's name, see whether they can be linked to Kevin Bacon in < 6 steps
+#Retrieves information about actors and the movies they've been in.
+#Might make this into a quiz?
+
 $:.unshift (File.dirname(__FILE__))
 require 'imdb'
 require 'actor'
 require 'film'
 require 'byebug'
 
-imdb = Imdb.new
-
 #Maintain a hash of films, and an array of actors. Once I know how, I'll put these in a database
 films = {}
 actors = []
+
+#We're really only interested in films which contain multiple actors from the list above
 common_films = []
 
 #Create some actor objects
 actors << Actor.new('Kevin Bacon')
-actors << Actor.new('Steve Martin')
-actors << Actor.new('Brad Pitt')
-actors << Actor.new('Julia Roberts')
-actors << Actor.new('John Candy')
-actors << Actor.new('Anthony Hopkins')
+#actors << Actor.new('Steve Martin')
+#actors << Actor.new('Brad Pitt')
+#actors << Actor.new('Julia Roberts')
+#actors << Actor.new('John Candy')
+#actors << Actor.new('Anthony Hopkins')
 
-#Fetch their filmographies from IMDB. (If I knew how to program events
-#I'd do this automatically when each actor was created)
+#Now that we have all the actors' details, analyse their films to see which films had common actors
 actors.each do |actor|
-  imdb.find_films(actor)
   
-  #Create a new Film object, then add it to the films array
+  #Create a new Film object, then add it to the films hash
   actor.films.each do |film_title|
     film = Film.new(film_title, actor.name)
     key = film.short_title
@@ -37,7 +35,7 @@ actors.each do |actor|
       films[key] = film
       
     #Otherwise add this actor to the existing film's cast. Append
-    #this film to the common_films list
+    #this film to the common_films array
     else
       films[key].cast << actor.name
       common_films << film_title
