@@ -5,27 +5,32 @@ $:.unshift (File.dirname(__FILE__))
 require 'imdb'
 require 'actor'
 require 'film'
+require 'quiz'
+
 require 'byebug'
 
-#Maintain a hash of films, and an array of actors. Once I know how, I'll put these in a database
+#Maintain a hash of films, and an array of actors. Once I know how,
+#I'll put these in a database
 films = {}
 actors = []
 
-#We're really only interested in films which contain multiple actors from the list above
+#We're really only interested in films which contain multiple actors
+#from the list above
 common_films = []
 
 #Create some actor objects
 actors << Actor.new('Kevin Bacon')
-#actors << Actor.new('Steve Martin')
-#actors << Actor.new('Brad Pitt')
-#actors << Actor.new('Julia Roberts')
-#actors << Actor.new('John Candy')
-#actors << Actor.new('Anthony Hopkins')
+actors << Actor.new('Steve Martin')
+actors << Actor.new('Brad Pitt')
+actors << Actor.new('Julia Roberts')
+actors << Actor.new('John Candy')
+actors << Actor.new('Anthony Hopkins')
+actors << Actor.new('George Clooney')
 
-#Now that we have all the actors' details, analyse their films to see which films had common actors
+#Now that we have all the actors' details, analyse their films to
+#see which films had common actors
 actors.each do |actor|
-  
-  #Create a new Film object, then add it to the films hash
+
   actor.films.each do |film_title|
     film = Film.new(film_title, actor.name)
     key = film.short_title
@@ -51,3 +56,8 @@ common_films.each do |film_title|
   film = films[short_title]
   puts "#{film.title} features #{film.cast}"
 end
+
+byebug
+
+quiz = Quiz.new(common_films, actors)
+puts quiz

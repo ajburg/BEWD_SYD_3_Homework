@@ -15,8 +15,4 @@ class Actor < Imdb
     self.find_films(self)
   end
   
-  def analyse_films
-  
-  end
-  
 end
