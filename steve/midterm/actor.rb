@@ -5,7 +5,7 @@ class Actor < Imdb
   def initialize(name)
     #Create a new actor object, then download the films they've been in
     @name = name
-    @films = []
+    @films = [] #all films this actor has appeared in
     retrieve_films
   end
   
